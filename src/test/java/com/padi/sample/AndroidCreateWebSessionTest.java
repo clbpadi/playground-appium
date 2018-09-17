@@ -17,10 +17,10 @@ public class AndroidCreateWebSessionTest extends BaseTest {
     @BeforeEach
     public void setUp() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "Nexus 6 API 28");
+//        capabilities.setCapability("deviceName", "Nexus 6 API 28");
 //        capabilities.setCapability("deviceName", "Nexus 5X API 28");
 //        capabilities.setCapability("deviceName", "Android Emulator");
-        capabilities.setCapability("browserName", "Chrome");
+//        capabilities.setCapability("browserName", "Chrome");
         driver = new AndroidDriver<WebElement>(getServiceUrl(), capabilities);
         System.out.println("driver created!");
     }
