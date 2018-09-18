@@ -29,9 +29,9 @@ public abstract class BaseTest {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-//        setUpIos(capabilities);
-
         // DO NOT specify any capabilities if uploading to AWS device farm
+//        setUpIos(capabilities);
+//        setUpAndroid(capabilities);
 
         driver = new AppiumDriver<WebElement>(url, capabilities);
 
