@@ -1,7 +1,7 @@
 package com.padi.sample;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
@@ -29,18 +29,32 @@ public abstract class BaseTest {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
+//        setUpIos(capabilities);
+
         // DO NOT specify any capabilities if uploading to AWS device farm
-        capabilities.setCapability("platformName", "android");
-        capabilities.setCapability("deviceName", "Nexus 6 API 28");
-//        capabilities.setCapability("deviceName", "Nexus 5X API 28");
-//        capabilities.setCapability("deviceName", "Android Emulator");
-        capabilities.setCapability("browserName", "Chrome");
-//        driver = new AndroidDriver<WebElement>(url, capabilities);
+
         driver = new AppiumDriver<WebElement>(url, capabilities);
 
         driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
 
         System.out.println("driver created!");
+    }
+
+    private static void setUpAndroid(DesiredCapabilities capabilities) {
+        capabilities.setCapability("platformName", "android");
+        capabilities.setCapability("deviceName", "Nexus 6 API 28");
+//        capabilities.setCapability("deviceName", "Nexus 5X API 28");
+//        capabilities.setCapability("deviceName", "Android Emulator");
+        capabilities.setCapability("browserName", "Chrome");
+    }
+
+    private static void setUpIos(DesiredCapabilities capabilities) {
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+//        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "11.4"); // nope - not compatible with appium 1.7.2
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.3");
+        capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Safari");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 5");
+
     }
 
     @AfterSuite
