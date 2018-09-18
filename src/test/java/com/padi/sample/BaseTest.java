@@ -1,5 +1,6 @@
 package com.padi.sample;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,7 +18,8 @@ public abstract class BaseTest {
 
 //    private static AppiumDriverLocalService service;
 
-    AndroidDriver<WebElement> driver;
+    AppiumDriver<WebElement> driver;
+//    AndroidDriver<WebElement> driver;
 
     @BeforeSuite
     public void setUp() throws MalformedURLException {
@@ -28,11 +30,13 @@ public abstract class BaseTest {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         // DO NOT specify any capabilities if uploading to AWS device farm
-//        capabilities.setCapability("deviceName", "Nexus 6 API 28");
+        capabilities.setCapability("platformName", "android");
+        capabilities.setCapability("deviceName", "Nexus 6 API 28");
 //        capabilities.setCapability("deviceName", "Nexus 5X API 28");
 //        capabilities.setCapability("deviceName", "Android Emulator");
-//        capabilities.setCapability("browserName", "Chrome");
-        driver = new AndroidDriver<WebElement>(url, capabilities);
+        capabilities.setCapability("browserName", "Chrome");
+//        driver = new AndroidDriver<WebElement>(url, capabilities);
+        driver = new AppiumDriver<WebElement>(url, capabilities);
 
         driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
 
